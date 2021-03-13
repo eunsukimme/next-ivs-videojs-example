@@ -11,13 +11,6 @@ import {
   TextMetadataCue,
 } from "amazon-ivs-player";
 import Head from "next/head";
-import styled from "styled-components";
-
-const Wrapper = styled.div`
-  width: 640px;
-  height: 480px;
-  margin: 15px;
-`;
 
 // 디폴트 playback url
 const defaultPlaybackUrl =
@@ -119,21 +112,27 @@ function IVSPlayer({ src, handleQuizEvent }: IVSPlayerProps) {
   return (
     <>
       <Head>
+        {/** Load IVS tech */}
+        <script src="https://player.live-video.net/1.2.0/amazon-ivs-videojs-tech.min.js"></script>
+        {/** Load IVS quality plugin */}
+        <script src="https://player.live-video.net/1.2.0/amazon-ivs-quality-plugin.min.js"></script>
         {/** IVS 플레이어에서 제공해주는 플러그인 UI를 스타일링 하는 css */}
         <link
           href="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.6.6/video-js.css"
           rel="stylesheet"
         />
       </Head>
-      <Wrapper className="video-container">
-        <video
-          id="amazon-ivs-videojs"
-          className="video-js vjs-4-3 vjs-big-play-centered"
-          controls
-          autoPlay
-          playsInline
-        ></video>
-      </Wrapper>
+      <video
+        id="amazon-ivs-videojs"
+        className="video-js"
+        controls
+        autoPlay
+        playsInline
+        style={{
+          width: "640px",
+          height: "480px",
+        }}
+      ></video>
     </>
   );
 }
